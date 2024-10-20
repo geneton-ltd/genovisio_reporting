@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    {% if id != None %}
+    <title>Report {{ id }}</title>
+    {% elif id == None %}
+    <title>CNV Report</title>
+    {% endif %}
+
+    <link
+      href="https://cdn.datatables.net/2.1.4/css/dataTables.dataTables.min.css"
+      rel="stylesheet"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
+    <script
+      src="https://cdn.plot.ly/plotly-2.35.2.min.js"
+      charset="utf-8"
+    ></script>
+
+    <style>
+      {{ css }}
+    </style>
+  </head>
+
+  <body>
+    <div class="sheet-outer A4">
+      <section class="sheet padding-5mm">
+        {% if id != None %}
+        <h1 style="text-align: right">Report ID: {{ id }}</h1>
+        {% elif id == None %}
+        <h1 style="text-align: right">CNV Report</h1>
+        {% endif %}
+
+        <table class="tb-cnv">
+          {% include 'partials/cnv_info.html' %}
+        </table>
+
+        <table class="tb-classification">
+          {% include 'partials/autoclassification.html' %}
+        </table>
+
+        <table class="tb-score">
+          {% include 'partials/prediction_summary.html' %}
+        </table>
+
+        <table class="tb-acmg">
+          <thead>
+            <tr>
+              <th>ACMG-ClinGen Standards (marCNV):</th>
+              <th>ISV SHAP values:</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>{% include 'partials/acmg.html' %}</td>
+              <td>
+                <div class="last">
+                  <div id="isv_shap"></div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table class="tb-genes">
+          {% include 'partials/genes.html' %}
+        </table>
+
+        <div>
+          <p class="version">{{ version_string }}</p>
+        </div>
+
+        <!--
+        <table class="tb-elements">
+          <thead>
+            <tr>
+              <th>Functionally important elements: elements.total</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>
+                <div class="list-scrollable">
+                  elements.list
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    -->
+      </section>
+    </div>
+
+    <script>
+      const config = {
+        displayModeBar: false,
+      };
+
+      var marcnv_prediction = {{ marcnv_plot }};
+      var isv_prediction = {{ isv_plot }};
+      var hybrid_prediction = {{ hybrid_plot }};
+
+      marcnv_prediction["config"] = config;
+      isv_prediction["config"] = config;
+      hybrid_prediction["config"] = config;
+
+      Plotly.react("marcnv", marcnv_prediction);
+      Plotly.react("isv", isv_prediction);
+      Plotly.react("hybrid", hybrid_prediction);
+
+      var isv_shap = {{ isv_shap }};
+      isv_shap["config"] = config;
+
+      Plotly.react("isv_shap", isv_shap);
+    </script>
+  </body>
+</html>
