@@ -23,10 +23,10 @@ This gives you the following entrypoint command: `genovisio-report`.
 
 ## Running
 
-To create a report, you need outputs from genovisio tools. There are some example outputs provided in tests/ directory, so you can run:
+To create a report, you need annotated CNV region and outputs from genovisio tools. There are some example outputs provided in tests/ directory, so you can run:
 
 ```sh
-genovisio-report --annot tests/isv_annot.json --isv tests/isv.json --marcnv tests/marcnv.json --hybrid tests/hybrid.json --out_html report.html
+genovisio-report --annot tests/annotation_test.json.gz --isv tests/isv.json --marcnv tests/marcnv.json --hybrid tests/hybrid.json --out_html report.html
 ```
 
 This will generate `report.html` from the inputs.
