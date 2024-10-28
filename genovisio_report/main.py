@@ -1,9 +1,7 @@
 import argparse
-import csv
 import importlib.metadata
 import os
 import sys
-from dataclasses import asdict
 
 import annotation
 import jinja2
@@ -107,13 +105,7 @@ def genovisio_report(
     output_path_csv = os.path.abspath(output_csv)
     if not os.path.exists(os.path.dirname(output_path_csv)):
         os.makedirs(os.path.dirname(output_path_csv))
-    with open(output_path_csv, "w", newline="") as f:
-        flat_dict = asdict(data.flatten)
-        fieldnames = flat_dict.keys()
-        writer = csv.DictWriter(f, fieldnames=fieldnames, quoting=csv.QUOTE_ALL)
-        writer.writeheader()
-        writer.writerow(flat_dict)
-
+    data.flatten.store_as_csv(output_path_csv)
     print(f"Report data stored at {output_path_csv}", file=sys.stderr)
 
 
@@ -121,7 +113,9 @@ def main() -> None:
     try:
         version = importlib.metadata.version("genovisio_report")
     except importlib.metadata.PackageNotFoundError:
-        version = "dev-0.0.0"
+        # x-release-please-start-version
+        version = "0.1.0"
+        # x-release-please-end
         print(f"Not installed as package. Using placeholder {version=}", file=sys.stderr)
 
     parser = argparse.ArgumentParser()
