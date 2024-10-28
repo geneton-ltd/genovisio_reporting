@@ -1,14 +1,14 @@
 from dataclasses import dataclass, field
 
-
 import annotation
+
 
 @dataclass
 class GeneReport:
     genes: list[str]
     count: int = field(init=False)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.count = len(self.genes)
 
     @property
@@ -32,7 +32,7 @@ class GenesReport:
 
     @classmethod
     def build(cls, annot: annotation.Annotation) -> "GenesReport":
-        sv_counts = annot.get_annotated_genes( )
+        sv_counts = annot.get_annotated_genes()
         return cls(
             protein_coding=annot.count_gene_types()["protein_coding"],
             morbid=GeneReport(sv_counts["morbid_genes"]),

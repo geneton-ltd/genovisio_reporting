@@ -6,15 +6,9 @@ from genovisio_report.src import enums, input_utils
 class MarcnvCriterion(pydantic.BaseModel):
     section: int
     option: str
-    score: float | None = None
-    reason: list[str]
+    score: float
+    reason: str
     evidence: str
-
-    @pydantic.field_validator("reason", mode="before")
-    def reason_must_be_list(cls, v: str | list[str]) -> list[str]:
-        if isinstance(v, str):
-            return [v]
-        return v
 
 
 class MarcNV(pydantic.BaseModel):
