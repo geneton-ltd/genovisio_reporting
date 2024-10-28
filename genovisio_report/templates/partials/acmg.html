@@ -4,9 +4,7 @@
       <tr>
         <td>
           <h4>Section 1: Genomic content</h4>
-          {% for item in acmg.Section_1.reasons %}
-          <p>{{ item }}</p>
-          {% endfor %}
+          <p>{{ acmg.Section_1.format_reason }}</p>
         </td>
         <td class="td-score">
           {% if acmg.Section_1.score == None %}
@@ -35,9 +33,7 @@
       <tr>
         <td>
           <h4>Section 2: Overlap with established regions</h4>
-          {% for item in acmg.Section_2.reasons %}
-          <p>{{ item }}</p>
-          {% endfor %}
+          <p>{{ acmg.Section_2.format_reason }}</p>
         </td>
         <td class="td-score">
           {% if acmg.Section_2.score == None %}
@@ -66,9 +62,7 @@
       <tr>
         <td>
           <h4>Section 3: Gene numbers</h4>
-          {% for item in acmg.Section_3.reasons %}
-          <p>{{ item }}</p>
-          {% endfor %}
+          <p>{{ acmg.Section_3.format_reason }}</p>
         </td>
         <td class="td-score">
           {% if acmg.Section_3.score == None %}
@@ -97,9 +91,7 @@
       <tr>
         <td>
           <h4>Section 4: Public/internal data</h4>
-          {% for item in acmg.Section_4.reasons %}
-          <p>{{ item }}</p>
-          {% endfor %}
+          <p>{{ acmg.Section_4.format_reason }}</p>
         </td>
         <td class="td-score">
           {% if acmg.Section_4.score == None %}
@@ -128,9 +120,7 @@
       <tr>
         <td>
           <h4>Section 5: Inheritance pattern</h4>
-          {% for item in acmg.Section_5.reasons %}
-          <p>{{ item }}</p>
-          {% endfor %}
+          <p>{{ acmg.Section_5.format_reason }}</p>
         </td>
         <td class="td-score">
           {% if acmg.Section_5.score == None %}

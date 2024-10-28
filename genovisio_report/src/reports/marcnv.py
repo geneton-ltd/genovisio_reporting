@@ -5,17 +5,20 @@ from genovisio_report.src import input_schemas
 
 @dataclass
 class MarcNVReportSection:
-    reasons: list[str]
-    score: float | None = None
+    option: str
+    reason: str
+    score: float
 
     @classmethod
     def create_from_criterion(cls, criterion: input_schemas.MarcnvCriterion) -> "MarcNVReportSection":
-        if criterion.option != "Other":
-            reasons = [f"<b>{criterion.option}.</b> {criterion.reason[0]}"]
+        return cls(option=criterion.option, reason=criterion.reason, score=criterion.score)
+
+    @property
+    def format_reason(self) -> str:
+        if self.option != "Other":
+            return f"<b>{self.option}.</b> {self.reason}"
         else:
-            reasons = criterion.reason
-        score = criterion.score
-        return cls(reasons=reasons, score=score)
+            return self.reason
 
 
 @dataclass
