@@ -2,15 +2,33 @@ from dataclasses import dataclass
 
 import annotation
 
+
 @dataclass
 class CNVInfo:
-    type: str
-    pos: str
+    chr: str
+    start: int
+    end: int
+    cnv_type: str
+    cyto_position: str
 
     @classmethod
     def build(cls, cnv_data: annotation.CNVRegionAnnotation) -> "CNVInfo":
-        copy_number = 1 if cnv_data.cnv_type == annotation.enums.CNVType.LOSS else 3
         return cls(
-            type=cnv_data.cnv_type.upper(),
-            pos=f"{cnv_data.cytogenetic_position}({cnv_data.chr}:{cnv_data.start}-{cnv_data.end})x{copy_number}",
+            chr=cnv_data.chr,
+            start=cnv_data.start,
+            end=cnv_data.end,
+            cnv_type=cnv_data.cnv_type,
+            cyto_position=cnv_data.cytogenetic_position,
         )
+
+    @property
+    def copy_number(self) -> int:
+        return 1 if self.type == "LOSS" else 3
+
+    @property
+    def type(self) -> str:
+        return self.cnv_type.upper()
+
+    @property
+    def pos(self) -> str:
+        return f"{self.cyto_position}({self.chr}:{self.start}-{self.end})x{self.copy_number}"

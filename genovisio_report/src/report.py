@@ -12,7 +12,11 @@ class FlatReportData:
     """
 
     report_id: str | None
+    chrom: str
+    start: int
+    end: int
     cnv_type: str
+    cytogenetic_location: str
     cnv_position: str
     marcnv_section1_reason: str
     marcnv_section1_option: str
@@ -102,7 +106,11 @@ class FlatReportData:
             row = next(reader)
         return cls(
             report_id=row["report_id"],
+            chrom=row["chrom"],
+            start=int(row["start"]),
+            end=int(row["end"]),
             cnv_type=row["cnv_type"],
+            cytogenetic_location=row["cytogenetic_location"],
             cnv_position=row["cnv_position"],
             marcnv_section1_reason=row["marcnv_section1_reason"],
             marcnv_section1_option=row["marcnv_section1_option"],
@@ -209,6 +217,10 @@ class ReportData:
     def flatten(self) -> FlatReportData:
         return FlatReportData(
             report_id=self.report_id,
+            chrom=self.cnv_info.chr,
+            start=self.cnv_info.start,
+            end=self.cnv_info.end,
+            cytogenetic_location=self.cnv_info.cyto_position,
             cnv_type=self.cnv_info.type,
             cnv_position=self.cnv_info.pos,
             marcnv_section1_reason=self.marcnv.Section_1.reason,
