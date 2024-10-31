@@ -16,7 +16,8 @@ annotation = {git = "https://github.com/geneton-ltd/genovisio_annotation.git#0.2
 genovisio-report = "genovisio_report.main:main"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^6.0.0"
+pytest = ">=8.2.0"
+pre-commit = ">=4.0.1"
 
 [build-system]
 requires = ["poetry-core"]

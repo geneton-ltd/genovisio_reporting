@@ -60,7 +60,6 @@ class ISVResult(pydantic.BaseModel):
     score: float = pydantic.Field(alias="isv_score")
     classification: enums.Severity = pydantic.Field(alias="isv_classification")
     isv_shap_values: SHAPs = pydantic.Field(alias="isv_shap_values")
-    isv_shap_scores: SHAPs = pydantic.Field(alias="isv_shap_scores")
     isv_features: ISVFeatures = pydantic.Field(alias="isv_features")
 
     @pydantic.field_validator("classification", mode="before")
