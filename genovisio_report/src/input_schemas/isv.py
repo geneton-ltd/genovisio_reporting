@@ -29,13 +29,10 @@ class ISVFeatures(pydantic.BaseModel):
         return self.model_dump()
 
 
-class SHAPs(pydantic.BaseModel):
+class SHAPsGain(pydantic.BaseModel):
     gencode_genes: float
-    protein_coding: float
     pseudogenes: float
     mirna: float
-    lncrna: float
-    rrna: float
     snrna: float
     morbid_genes: float
     disease_associated_genes: float
@@ -44,12 +41,25 @@ class SHAPs(pydantic.BaseModel):
     regions_TS: float
     regulatory: float
     regulatory_enhancer: float
-    regulatory_silencer: float
-    regulatory_transcriptional_cis_regulatory_region: float
+
+    def as_dict(self) -> dict[str, float]:
+        return self.model_dump()
+
+
+class SHAPsLoss(pydantic.BaseModel):
+    gencode_genes: float
+    protein_coding: float
+    pseudogenes: float
+    mirna: float
+    lncrna: float
+    morbid_genes: float
+    disease_associated_genes: float
+    hi_genes: float
+    regions_HI: float
+    regions_TS: float
+    regulatory: float
+    regulatory_enhancer: float
     regulatory_promoter: float
-    regulatory_DNase_I_hypersensitive_site: float
-    regulatory_enhancer_blocking_element: float
-    regulatory_TATA_box: float
 
     def as_dict(self) -> dict[str, float]:
         return self.model_dump()
@@ -59,7 +69,7 @@ class ISVResult(pydantic.BaseModel):
     prediction: float = pydantic.Field(alias="isv_prediction")
     score: float = pydantic.Field(alias="isv_score")
     classification: enums.Severity = pydantic.Field(alias="isv_classification")
-    isv_shap_values: SHAPs = pydantic.Field(alias="isv_shap_values")
+    isv_shap_values: SHAPsGain | SHAPsLoss = pydantic.Field(alias="isv_shap_values")
     isv_features: ISVFeatures = pydantic.Field(alias="isv_features")
 
     @pydantic.field_validator("classification", mode="before")

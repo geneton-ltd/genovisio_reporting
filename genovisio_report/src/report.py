@@ -48,46 +48,46 @@ class FlatReportData:
     genes_disease_associated_list: list[str]
     genes_hi_list: list[str]
     genes_ts_list: list[str]
-    isv_gencode_genes: int
-    isv_protein_coding: int
-    isv_pseudogenes: int
-    isv_mirna: int
-    isv_lncrna: int
-    isv_rrna: int
-    isv_snrna: int
-    isv_morbid_genes: int
-    isv_disease_associated_genes: int
-    isv_hi_genes: int
-    isv_regions_HI: int
-    isv_regions_TS: int
-    isv_regulatory: int
-    isv_regulatory_enhancer: int
-    isv_regulatory_silencer: int
-    isv_regulatory_transcriptional_cis_regulatory_region: int
-    isv_regulatory_promoter: int
-    isv_regulatory_DNase_I_hypersensitive_site: int
-    isv_regulatory_enhancer_blocking_element: int
-    isv_regulatory_TATA_box: int
-    isv_shap_gencode_genes: float
-    isv_shap_protein_coding: float
-    isv_shap_pseudogenes: float
-    isv_shap_mirna: float
-    isv_shap_lncrna: float
-    isv_shap_rrna: float
-    isv_shap_snrna: float
-    isv_shap_morbid_genes: float
-    isv_shap_disease_associated_genes: float
-    isv_shap_hi_genes: float
-    isv_shap_regions_HI: float
-    isv_shap_regions_TS: float
-    isv_shap_regulatory: float
-    isv_shap_regulatory_enhancer: float
-    isv_shap_regulatory_silencer: float
-    isv_shap_regulatory_transcriptional_cis_regulatory_region: float
-    isv_shap_regulatory_promoter: float
-    isv_shap_regulatory_DNase_I_hypersensitive_site: float
-    isv_shap_regulatory_enhancer_blocking_element: float
-    isv_shap_regulatory_TATA_box: float
+    isv_gencode_genes: int | None
+    isv_protein_coding: int | None
+    isv_pseudogenes: int | None
+    isv_mirna: int | None
+    isv_lncrna: int | None
+    isv_rrna: int | None
+    isv_snrna: int | None
+    isv_morbid_genes: int | None
+    isv_disease_associated_genes: int | None
+    isv_hi_genes: int | None
+    isv_regions_HI: int | None
+    isv_regions_TS: int | None
+    isv_regulatory: int | None
+    isv_regulatory_enhancer: int | None
+    isv_regulatory_silencer: int | None
+    isv_regulatory_transcriptional_cis_regulatory_region: int | None
+    isv_regulatory_promoter: int | None
+    isv_regulatory_DNase_I_hypersensitive_site: int | None
+    isv_regulatory_enhancer_blocking_element: int | None
+    isv_regulatory_TATA_box: int | None
+    isv_shap_gencode_genes: float | None
+    isv_shap_protein_coding: float | None
+    isv_shap_pseudogenes: float | None
+    isv_shap_mirna: float | None
+    isv_shap_lncrna: float | None
+    isv_shap_rrna: float | None
+    isv_shap_snrna: float | None
+    isv_shap_morbid_genes: float | None
+    isv_shap_disease_associated_genes: float | None
+    isv_shap_hi_genes: float | None
+    isv_shap_regions_HI: float | None
+    isv_shap_regions_TS: float | None
+    isv_shap_regulatory: float | None
+    isv_shap_regulatory_enhancer: float | None
+    isv_shap_regulatory_silencer: float | None
+    isv_shap_regulatory_transcriptional_cis_regulatory_region: float | None
+    isv_shap_regulatory_promoter: float | None
+    isv_shap_regulatory_DNase_I_hypersensitive_site: float | None
+    isv_shap_regulatory_enhancer_blocking_element: float | None
+    isv_shap_regulatory_TATA_box: float | None
     workflow_version: str | None
     report_version: str
 
@@ -142,52 +142,76 @@ class FlatReportData:
             genes_disease_associated_list=ast.literal_eval(row["genes_disease_associated_list"]),
             genes_hi_list=ast.literal_eval(row["genes_hi_list"]),
             genes_ts_list=ast.literal_eval(row["genes_ts_list"]),
-            isv_gencode_genes=int(row["isv_gencode_genes"]),
-            isv_protein_coding=int(row["isv_protein_coding"]),
-            isv_pseudogenes=int(row["isv_pseudogenes"]),
-            isv_mirna=int(row["isv_mirna"]),
-            isv_lncrna=int(row["isv_lncrna"]),
-            isv_rrna=int(row["isv_rrna"]),
-            isv_snrna=int(row["isv_snrna"]),
-            isv_morbid_genes=int(row["isv_morbid_genes"]),
-            isv_disease_associated_genes=int(row["isv_disease_associated_genes"]),
-            isv_hi_genes=int(row["isv_hi_genes"]),
-            isv_regions_HI=int(row["isv_regions_HI"]),
-            isv_regions_TS=int(row["isv_regions_TS"]),
-            isv_regulatory=int(row["isv_regulatory"]),
-            isv_regulatory_enhancer=int(row["isv_regulatory_enhancer"]),
-            isv_regulatory_silencer=int(row["isv_regulatory_silencer"]),
+            isv_gencode_genes=int(row["isv_gencode_genes"]) if row["isv_gencode_genes"] else None,
+            isv_protein_coding=int(row["isv_protein_coding"]) if row["isv_protein_coding"] else None,
+            isv_pseudogenes=int(row["isv_pseudogenes"]) if row["isv_pseudogenes"] else None,
+            isv_mirna=int(row["isv_mirna"]) if row["isv_mirna"] else None,
+            isv_lncrna=int(row["isv_lncrna"]) if row["isv_lncrna"] else None,
+            isv_rrna=int(row["isv_rrna"]) if row["isv_rrna"] else None,
+            isv_snrna=int(row["isv_snrna"]) if row["isv_snrna"] else None,
+            isv_morbid_genes=int(row["isv_morbid_genes"]) if row["isv_morbid_genes"] else None,
+            isv_disease_associated_genes=int(row["isv_disease_associated_genes"])
+            if row["isv_disease_associated_genes"]
+            else None,
+            isv_hi_genes=int(row["isv_hi_genes"]) if row["isv_hi_genes"] else None,
+            isv_regions_HI=int(row["isv_regions_HI"]) if row["isv_regions_HI"] else None,
+            isv_regions_TS=int(row["isv_regions_TS"]) if row["isv_regions_TS"] else None,
+            isv_regulatory=int(row["isv_regulatory"]) if row["isv_regulatory"] else None,
+            isv_regulatory_enhancer=int(row["isv_regulatory_enhancer"]) if row["isv_regulatory_enhancer"] else None,
+            isv_regulatory_silencer=int(row["isv_regulatory_silencer"]) if row["isv_regulatory_silencer"] else None,
             isv_regulatory_transcriptional_cis_regulatory_region=int(
                 row["isv_regulatory_transcriptional_cis_regulatory_region"]
-            ),
-            isv_regulatory_promoter=int(row["isv_regulatory_promoter"]),
-            isv_regulatory_DNase_I_hypersensitive_site=int(row["isv_regulatory_DNase_I_hypersensitive_site"]),
-            isv_regulatory_enhancer_blocking_element=int(row["isv_regulatory_enhancer_blocking_element"]),
-            isv_regulatory_TATA_box=int(row["isv_regulatory_TATA_box"]),
-            isv_shap_gencode_genes=float(row["isv_shap_gencode_genes"]),
-            isv_shap_protein_coding=float(row["isv_shap_protein_coding"]),
-            isv_shap_pseudogenes=float(row["isv_shap_pseudogenes"]),
-            isv_shap_mirna=float(row["isv_shap_mirna"]),
-            isv_shap_lncrna=float(row["isv_shap_lncrna"]),
-            isv_shap_rrna=float(row["isv_shap_rrna"]),
-            isv_shap_snrna=float(row["isv_shap_snrna"]),
-            isv_shap_morbid_genes=float(row["isv_shap_morbid_genes"]),
-            isv_shap_disease_associated_genes=float(row["isv_shap_disease_associated_genes"]),
-            isv_shap_hi_genes=float(row["isv_shap_hi_genes"]),
-            isv_shap_regions_HI=float(row["isv_shap_regions_HI"]),
-            isv_shap_regions_TS=float(row["isv_shap_regions_TS"]),
-            isv_shap_regulatory=float(row["isv_shap_regulatory"]),
-            isv_shap_regulatory_enhancer=float(row["isv_shap_regulatory_enhancer"]),
-            isv_shap_regulatory_silencer=float(row["isv_shap_regulatory_silencer"]),
+            )
+            if row["isv_regulatory_transcriptional_cis_regulatory_region"]
+            else None,
+            isv_regulatory_promoter=int(row["isv_regulatory_promoter"]) if row["isv_regulatory_promoter"] else None,
+            isv_regulatory_DNase_I_hypersensitive_site=int(row["isv_regulatory_DNase_I_hypersensitive_site"])
+            if row["isv_regulatory_DNase_I_hypersensitive_site"]
+            else None,
+            isv_regulatory_enhancer_blocking_element=int(row["isv_regulatory_enhancer_blocking_element"])
+            if row["isv_regulatory_enhancer_blocking_element"]
+            else None,
+            isv_regulatory_TATA_box=int(row["isv_regulatory_TATA_box"]) if row["isv_regulatory_TATA_box"] else None,
+            isv_shap_gencode_genes=float(row["isv_shap_gencode_genes"]) if row["isv_shap_gencode_genes"] else None,
+            isv_shap_protein_coding=float(row["isv_shap_protein_coding"]) if row["isv_shap_protein_coding"] else None,
+            isv_shap_pseudogenes=float(row["isv_shap_pseudogenes"]) if row["isv_shap_pseudogenes"] else None,
+            isv_shap_mirna=float(row["isv_shap_mirna"]) if row["isv_shap_mirna"] else None,
+            isv_shap_lncrna=float(row["isv_shap_lncrna"]) if row["isv_shap_lncrna"] else None,
+            isv_shap_rrna=float(row["isv_shap_rrna"]) if row["isv_shap_rrna"] else None,
+            isv_shap_snrna=float(row["isv_shap_snrna"]) if row["isv_shap_snrna"] else None,
+            isv_shap_morbid_genes=float(row["isv_shap_morbid_genes"]) if row["isv_shap_morbid_genes"] else None,
+            isv_shap_disease_associated_genes=float(row["isv_shap_disease_associated_genes"])
+            if row["isv_shap_disease_associated_genes"]
+            else None,
+            isv_shap_hi_genes=float(row["isv_shap_hi_genes"]) if row["isv_shap_hi_genes"] else None,
+            isv_shap_regions_HI=float(row["isv_shap_regions_HI"]) if row["isv_shap_regions_HI"] else None,
+            isv_shap_regions_TS=float(row["isv_shap_regions_TS"]) if row["isv_shap_regions_TS"] else None,
+            isv_shap_regulatory=float(row["isv_shap_regulatory"]) if row["isv_shap_regulatory"] else None,
+            isv_shap_regulatory_enhancer=float(row["isv_shap_regulatory_enhancer"])
+            if row["isv_shap_regulatory_enhancer"]
+            else None,
+            isv_shap_regulatory_silencer=float(row["isv_shap_regulatory_silencer"])
+            if row["isv_shap_regulatory_silencer"]
+            else None,
             isv_shap_regulatory_transcriptional_cis_regulatory_region=float(
                 row["isv_shap_regulatory_transcriptional_cis_regulatory_region"]
-            ),
-            isv_shap_regulatory_promoter=float(row["isv_shap_regulatory_promoter"]),
+            )
+            if row["isv_shap_regulatory_transcriptional_cis_regulatory_region"]
+            else None,
+            isv_shap_regulatory_promoter=float(row["isv_shap_regulatory_promoter"])
+            if row["isv_shap_regulatory_promoter"]
+            else None,
             isv_shap_regulatory_DNase_I_hypersensitive_site=float(
                 row["isv_shap_regulatory_DNase_I_hypersensitive_site"]
-            ),
-            isv_shap_regulatory_enhancer_blocking_element=float(row["isv_shap_regulatory_enhancer_blocking_element"]),
-            isv_shap_regulatory_TATA_box=float(row["isv_shap_regulatory_TATA_box"]),
+            )
+            if row["isv_shap_regulatory_DNase_I_hypersensitive_site"]
+            else None,
+            isv_shap_regulatory_enhancer_blocking_element=float(row["isv_shap_regulatory_enhancer_blocking_element"])
+            if row["isv_shap_regulatory_enhancer_blocking_element"]
+            else None,
+            isv_shap_regulatory_TATA_box=float(row["isv_shap_regulatory_TATA_box"])
+            if row["isv_shap_regulatory_TATA_box"]
+            else None,
             workflow_version=row["workflow_version"],
             report_version=row["report_version"],
         )
@@ -253,46 +277,78 @@ class ReportData:
             genes_disease_associated_list=self.genes.disease.genes,
             genes_hi_list=self.genes.hi.genes,
             genes_ts_list=self.genes.ts.genes,
-            isv_gencode_genes=self.isv_shaps.gencode_genes.value,
-            isv_protein_coding=self.isv_shaps.protein_coding.value,
-            isv_pseudogenes=self.isv_shaps.pseudogenes.value,
-            isv_mirna=self.isv_shaps.mirna.value,
-            isv_lncrna=self.isv_shaps.lncrna.value,
-            isv_rrna=self.isv_shaps.rrna.value,
-            isv_snrna=self.isv_shaps.snrna.value,
-            isv_morbid_genes=self.isv_shaps.morbid.value,
-            isv_disease_associated_genes=self.isv_shaps.disease_associated.value,
-            isv_hi_genes=self.isv_shaps.hi_genes.value,
-            isv_regions_HI=self.isv_shaps.regions_HI.value,
-            isv_regions_TS=self.isv_shaps.regions_TS.value,
-            isv_regulatory=self.isv_shaps.regulatory.value,
-            isv_regulatory_enhancer=self.isv_shaps.regulatory_enhancer.value,
-            isv_regulatory_silencer=self.isv_shaps.regulatory_silencer.value,
-            isv_regulatory_transcriptional_cis_regulatory_region=self.isv_shaps.regulatory_transcriptional_cis_regulatory_region.value,
-            isv_regulatory_promoter=self.isv_shaps.regulatory_promoter.value,
-            isv_regulatory_DNase_I_hypersensitive_site=self.isv_shaps.regulatory_DNase_I_hypersensitive_site.value,
-            isv_regulatory_enhancer_blocking_element=self.isv_shaps.regulatory_enhancer_blocking_element.value,
-            isv_regulatory_TATA_box=self.isv_shaps.regulatory_TATA_box.value,
-            isv_shap_gencode_genes=self.isv_shaps.gencode_genes.shap,
-            isv_shap_protein_coding=self.isv_shaps.protein_coding.shap,
-            isv_shap_pseudogenes=self.isv_shaps.pseudogenes.shap,
-            isv_shap_mirna=self.isv_shaps.mirna.shap,
-            isv_shap_lncrna=self.isv_shaps.lncrna.shap,
-            isv_shap_rrna=self.isv_shaps.rrna.shap,
-            isv_shap_snrna=self.isv_shaps.snrna.shap,
-            isv_shap_morbid_genes=self.isv_shaps.morbid.shap,
-            isv_shap_disease_associated_genes=self.isv_shaps.disease_associated.shap,
-            isv_shap_hi_genes=self.isv_shaps.hi_genes.shap,
-            isv_shap_regions_HI=self.isv_shaps.regions_HI.shap,
-            isv_shap_regions_TS=self.isv_shaps.regions_TS.shap,
-            isv_shap_regulatory=self.isv_shaps.regulatory.shap,
-            isv_shap_regulatory_enhancer=self.isv_shaps.regulatory_enhancer.shap,
-            isv_shap_regulatory_silencer=self.isv_shaps.regulatory_silencer.shap,
-            isv_shap_regulatory_transcriptional_cis_regulatory_region=self.isv_shaps.regulatory_transcriptional_cis_regulatory_region.shap,
-            isv_shap_regulatory_promoter=self.isv_shaps.regulatory_promoter.shap,
-            isv_shap_regulatory_DNase_I_hypersensitive_site=self.isv_shaps.regulatory_DNase_I_hypersensitive_site.shap,
-            isv_shap_regulatory_enhancer_blocking_element=self.isv_shaps.regulatory_enhancer_blocking_element.shap,
-            isv_shap_regulatory_TATA_box=self.isv_shaps.regulatory_TATA_box.shap,
+            isv_gencode_genes=self.isv_shaps.gencode_genes.value if self.isv_shaps.gencode_genes else None,
+            isv_protein_coding=self.isv_shaps.protein_coding.value if self.isv_shaps.protein_coding else None,
+            isv_pseudogenes=self.isv_shaps.pseudogenes.value if self.isv_shaps.pseudogenes else None,
+            isv_mirna=self.isv_shaps.mirna.value if self.isv_shaps.mirna else None,
+            isv_lncrna=self.isv_shaps.lncrna.value if self.isv_shaps.lncrna else None,
+            isv_rrna=self.isv_shaps.rrna.value if self.isv_shaps.rrna else None,
+            isv_snrna=self.isv_shaps.snrna.value if self.isv_shaps.snrna else None,
+            isv_morbid_genes=self.isv_shaps.morbid.value if self.isv_shaps.morbid else None,
+            isv_disease_associated_genes=self.isv_shaps.disease_associated.value
+            if self.isv_shaps.disease_associated
+            else None,
+            isv_hi_genes=self.isv_shaps.hi_genes.value if self.isv_shaps.hi_genes else None,
+            isv_regions_HI=self.isv_shaps.regions_HI.value if self.isv_shaps.regions_HI else None,
+            isv_regions_TS=self.isv_shaps.regions_TS.value if self.isv_shaps.regions_TS else None,
+            isv_regulatory=self.isv_shaps.regulatory.value if self.isv_shaps.regulatory else None,
+            isv_regulatory_enhancer=self.isv_shaps.regulatory_enhancer.value
+            if self.isv_shaps.regulatory_enhancer
+            else None,
+            isv_regulatory_silencer=self.isv_shaps.regulatory_silencer.value
+            if self.isv_shaps.regulatory_silencer
+            else None,
+            isv_regulatory_transcriptional_cis_regulatory_region=self.isv_shaps.regulatory_transcriptional_cis_regulatory_region.value
+            if self.isv_shaps.regulatory_transcriptional_cis_regulatory_region
+            else None,
+            isv_regulatory_promoter=self.isv_shaps.regulatory_promoter.value
+            if self.isv_shaps.regulatory_promoter
+            else None,
+            isv_regulatory_DNase_I_hypersensitive_site=self.isv_shaps.regulatory_DNase_I_hypersensitive_site.value
+            if self.isv_shaps.regulatory_DNase_I_hypersensitive_site
+            else None,
+            isv_regulatory_enhancer_blocking_element=self.isv_shaps.regulatory_enhancer_blocking_element.value
+            if self.isv_shaps.regulatory_enhancer_blocking_element
+            else None,
+            isv_regulatory_TATA_box=self.isv_shaps.regulatory_TATA_box.value
+            if self.isv_shaps.regulatory_TATA_box
+            else None,
+            isv_shap_gencode_genes=self.isv_shaps.gencode_genes.shap if self.isv_shaps.gencode_genes else None,
+            isv_shap_protein_coding=self.isv_shaps.protein_coding.shap if self.isv_shaps.protein_coding else None,
+            isv_shap_pseudogenes=self.isv_shaps.pseudogenes.shap if self.isv_shaps.pseudogenes else None,
+            isv_shap_mirna=self.isv_shaps.mirna.shap if self.isv_shaps.mirna else None,
+            isv_shap_lncrna=self.isv_shaps.lncrna.shap if self.isv_shaps.lncrna else None,
+            isv_shap_rrna=self.isv_shaps.rrna.shap if self.isv_shaps.rrna else None,
+            isv_shap_snrna=self.isv_shaps.snrna.shap if self.isv_shaps.snrna else None,
+            isv_shap_morbid_genes=self.isv_shaps.morbid.shap if self.isv_shaps.morbid else None,
+            isv_shap_disease_associated_genes=self.isv_shaps.disease_associated.shap
+            if self.isv_shaps.disease_associated
+            else None,
+            isv_shap_hi_genes=self.isv_shaps.hi_genes.shap if self.isv_shaps.hi_genes else None,
+            isv_shap_regions_HI=self.isv_shaps.regions_HI.shap if self.isv_shaps.regions_HI else None,
+            isv_shap_regions_TS=self.isv_shaps.regions_TS.shap if self.isv_shaps.regions_TS else None,
+            isv_shap_regulatory=self.isv_shaps.regulatory.shap if self.isv_shaps.regulatory else None,
+            isv_shap_regulatory_enhancer=self.isv_shaps.regulatory_enhancer.shap
+            if self.isv_shaps.regulatory_enhancer
+            else None,
+            isv_shap_regulatory_silencer=self.isv_shaps.regulatory_silencer.shap
+            if self.isv_shaps.regulatory_silencer
+            else None,
+            isv_shap_regulatory_transcriptional_cis_regulatory_region=self.isv_shaps.regulatory_transcriptional_cis_regulatory_region.shap
+            if self.isv_shaps.regulatory_transcriptional_cis_regulatory_region
+            else None,
+            isv_shap_regulatory_promoter=self.isv_shaps.regulatory_promoter.shap
+            if self.isv_shaps.regulatory_promoter
+            else None,
+            isv_shap_regulatory_DNase_I_hypersensitive_site=self.isv_shaps.regulatory_DNase_I_hypersensitive_site.shap
+            if self.isv_shaps.regulatory_DNase_I_hypersensitive_site
+            else None,
+            isv_shap_regulatory_enhancer_blocking_element=self.isv_shaps.regulatory_enhancer_blocking_element.shap
+            if self.isv_shaps.regulatory_enhancer_blocking_element
+            else None,
+            isv_shap_regulatory_TATA_box=self.isv_shaps.regulatory_TATA_box.shap
+            if self.isv_shaps.regulatory_TATA_box
+            else None,
             workflow_version=self.workflow_version,
             report_version=self.report_version,
         )

@@ -1,0 +1,40 @@
+{
+  "isv_prediction": 0.021677291020751,
+  "isv_score": -0.956645417958498,
+  "isv_classification": "Likely Benign",
+  "isv_shap_values": {
+    "gencode_genes": -0.017186203593183673,
+    "pseudogenes": -0.007123684375570069,
+    "mirna": -1.036799111268085e-06,
+    "snrna": 0.008558311941202901,
+    "morbid_genes": 0.0035552671220837506,
+    "disease_associated_genes": 0.01903788500422919,
+    "hi_genes": -0.006212273341317654,
+    "regions_HI": 0.002722864239490889,
+    "regions_TS": -0.010199338549626473,
+    "regulatory": 0.017366536040680506,
+    "regulatory_enhancer": -0.02190167287641485
+  },
+  "isv_features": {
+    "gencode_genes": 35,
+    "protein_coding": 7,
+    "pseudogenes": 15,
+    "mirna": 1,
+    "lncrna": 11,
+    "rrna": 0,
+    "snrna": 1,
+    "morbid_genes": 1,
+    "disease_associated_genes": 1,
+    "hi_genes": 0,
+    "regions_HI": 0,
+    "regions_TS": 0,
+    "regulatory": 219,
+    "regulatory_enhancer": 68,
+    "regulatory_silencer": 0,
+    "regulatory_transcriptional_cis_regulatory_region": 0,
+    "regulatory_promoter": 24,
+    "regulatory_DNase_I_hypersensitive_site": 0,
+    "regulatory_enhancer_blocking_element": 0,
+    "regulatory_TATA_box": 0
+  }
+}
