@@ -36,11 +36,11 @@ jobs:
 
       - name: Compare outputs html
         run: |
-          diff tests/test_output_loss.html tests/expected_loss.html
+          diff tests/test_output_loss.html tests/expected_output_loss.html
 
       - name: Compare outputs csv
         run: |
-          diff tests/test_output_loss.csv tests/expected_loss.csv
+          diff tests/test_output_loss.csv tests/expected_output_loss.csv
 
       - name: Run tests for isv gain
         run: |
@@ -48,8 +48,8 @@ jobs:
 
       - name: Compare outputs html
         run: |
-          diff tests/test_output_gain.html tests/expected_gain.html
+          diff tests/test_output_gain.html tests/expected_output_gain.html
 
       - name: Compare outputs csv
         run: |
-          diff tests/test_output_gain.csv tests/expected_gain.csv
+          diff tests/test_output_gain.csv tests/expected_output_gain.csv
