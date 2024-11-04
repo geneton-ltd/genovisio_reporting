@@ -114,7 +114,7 @@ def main() -> None:
         version = importlib.metadata.version("genovisio_report")
     except importlib.metadata.PackageNotFoundError:
         # x-release-please-start-version
-        version = "0.2.1"
+        version = "0.3.0"
         # x-release-please-end
         print(f"Not installed as package. Using placeholder {version=}", file=sys.stderr)
 
