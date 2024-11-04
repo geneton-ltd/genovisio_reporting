@@ -1,5 +1,5 @@
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 
 import plotly.graph_objects as go
 
@@ -55,113 +55,100 @@ class ShapDatum:
 
 @dataclass
 class ShapData:
-    gencode_genes: ShapDatum
-    disease_associated: ShapDatum
-    hi_genes: ShapDatum
-    lncrna: ShapDatum
-    mirna: ShapDatum
-    morbid: ShapDatum
-    protein_coding: ShapDatum
-    pseudogenes: ShapDatum
-    regions_HI: ShapDatum
-    regions_TS: ShapDatum
-    regulatory: ShapDatum
-    regulatory_DNase_I_hypersensitive_site: ShapDatum
-    regulatory_TATA_box: ShapDatum
-    regulatory_enhancer: ShapDatum
-    regulatory_enhancer_blocking_element: ShapDatum
-    regulatory_promoter: ShapDatum
-    regulatory_silencer: ShapDatum
-    regulatory_transcriptional_cis_regulatory_region: ShapDatum
-    rrna: ShapDatum
-    snrna: ShapDatum
+    gencode_genes: ShapDatum | None = None
+    disease_associated: ShapDatum | None = None
+    hi_genes: ShapDatum | None = None
+    lncrna: ShapDatum | None = None
+    mirna: ShapDatum | None = None
+    morbid: ShapDatum | None = None
+    protein_coding: ShapDatum | None = None
+    pseudogenes: ShapDatum | None = None
+    regions_HI: ShapDatum | None = None
+    regions_TS: ShapDatum | None = None
+    regulatory: ShapDatum | None = None
+    regulatory_DNase_I_hypersensitive_site: ShapDatum | None = None
+    regulatory_TATA_box: ShapDatum | None = None
+    regulatory_enhancer: ShapDatum | None = None
+    regulatory_enhancer_blocking_element: ShapDatum | None = None
+    regulatory_promoter: ShapDatum | None = None
+    regulatory_silencer: ShapDatum | None = None
+    regulatory_transcriptional_cis_regulatory_region: ShapDatum | None = None
+    rrna: ShapDatum | None = None
+    snrna: ShapDatum | None = None
 
     @property
-    def as_list(self) -> list[ShapDatum]:
-        lst = [
-            self.disease_associated,
-            self.gencode_genes,
-            self.hi_genes,
-            self.lncrna,
-            self.mirna,
-            self.morbid,
-            self.protein_coding,
-            self.pseudogenes,
-            self.regions_HI,
-            self.regions_TS,
-            self.regulatory,
-            self.regulatory_DNase_I_hypersensitive_site,
-            self.regulatory_TATA_box,
-            self.regulatory_enhancer,
-            self.regulatory_enhancer_blocking_element,
-            self.regulatory_promoter,
-            self.regulatory_silencer,
-            self.regulatory_transcriptional_cis_regulatory_region,
-            self.rrna,
-            self.snrna,
-        ]
-        sorted_lst = sorted(lst, key=lambda x: x.name, reverse=True)
+    def as_list_without_nulls(self) -> list[ShapDatum]:
+        non_null_values = [value for field in fields(self) if (value := getattr(self, field.name)) is not None]
+        sorted_lst = sorted(non_null_values, key=lambda x: x.name, reverse=True)
         return sorted_lst
 
     @classmethod
     def build_from_isv_result(cls, isv: input_schemas.ISVResult) -> "ShapData":
-        return cls(
-            gencode_genes=ShapDatum(
-                "Overlapped Gencode Elements", isv.isv_shap_values.gencode_genes, isv.isv_features.gencode_genes
-            ),
-            disease_associated=ShapDatum(
-                "Disease associated Genes",
-                isv.isv_shap_values.disease_associated_genes,
-                isv.isv_features.disease_associated_genes,
-            ),
-            hi_genes=ShapDatum("Haploinsufficient Genes", isv.isv_shap_values.hi_genes, isv.isv_features.hi_genes),
-            lncrna=ShapDatum("Long non-coding RNA", isv.isv_shap_values.lncrna, isv.isv_features.lncrna),
-            mirna=ShapDatum("Micro RNA", isv.isv_shap_values.mirna, isv.isv_features.mirna),
-            morbid=ShapDatum("Morbid Genes", isv.isv_shap_values.morbid_genes, isv.isv_features.morbid_genes),
-            protein_coding=ShapDatum(
-                "Protein Coding Genes", isv.isv_shap_values.protein_coding, isv.isv_features.protein_coding
-            ),
-            pseudogenes=ShapDatum("Pseudogenes", isv.isv_shap_values.pseudogenes, isv.isv_features.pseudogenes),
-            regions_HI=ShapDatum(
-                "Haploinsufficient Regions", isv.isv_shap_values.regions_HI, isv.isv_features.regions_HI
-            ),
-            regions_TS=ShapDatum(
-                "Triplosensitive Regions", isv.isv_shap_values.regions_TS, isv.isv_features.regions_TS
-            ),
-            regulatory=ShapDatum("Regulatory Elements", isv.isv_shap_values.regulatory, isv.isv_features.regulatory),
-            regulatory_DNase_I_hypersensitive_site=ShapDatum(
-                "DNase I hypersensitive sites",
-                isv.isv_shap_values.regulatory_DNase_I_hypersensitive_site,
-                isv.isv_features.regulatory_DNase_I_hypersensitive_site,
-            ),
-            regulatory_TATA_box=ShapDatum(
-                "TATA box", isv.isv_shap_values.regulatory_TATA_box, isv.isv_features.regulatory_TATA_box
-            ),
-            regulatory_enhancer=ShapDatum(
-                "Enhancers", isv.isv_shap_values.regulatory_enhancer, isv.isv_features.regulatory_enhancer
-            ),
-            regulatory_enhancer_blocking_element=ShapDatum(
-                "Enhancer-blocking Elements",
-                isv.isv_shap_values.regulatory_enhancer_blocking_element,
-                isv.isv_features.regulatory_enhancer_blocking_element,
-            ),
-            regulatory_promoter=ShapDatum(
-                "Promoters", isv.isv_shap_values.regulatory_promoter, isv.isv_features.regulatory_promoter
-            ),
-            regulatory_silencer=ShapDatum(
-                "Silencers", isv.isv_shap_values.regulatory_silencer, isv.isv_features.regulatory_silencer
-            ),
-            regulatory_transcriptional_cis_regulatory_region=ShapDatum(
-                "Transcriptional cis-regulatory Regions",
-                isv.isv_shap_values.regulatory_transcriptional_cis_regulatory_region,
-                isv.isv_features.regulatory_transcriptional_cis_regulatory_region,
-            ),
-            rrna=ShapDatum("Ribosomal RNA", isv.isv_shap_values.rrna, isv.isv_features.rrna),
-            snrna=ShapDatum("Small nuclear RNA", isv.isv_shap_values.snrna, isv.isv_features.snrna),
-        )
+        if isinstance(isv.isv_shap_values, input_schemas.SHAPsGain):
+            return cls(
+                gencode_genes=ShapDatum(
+                    "Overlapped Gencode Elements", isv.isv_shap_values.gencode_genes, isv.isv_features.gencode_genes
+                ),
+                disease_associated=ShapDatum(
+                    "Disease associated Genes",
+                    isv.isv_shap_values.disease_associated_genes,
+                    isv.isv_features.disease_associated_genes,
+                ),
+                hi_genes=ShapDatum("Haploinsufficient Genes", isv.isv_shap_values.hi_genes, isv.isv_features.hi_genes),
+                mirna=ShapDatum("Micro RNA", isv.isv_shap_values.mirna, isv.isv_features.mirna),
+                morbid=ShapDatum("Morbid Genes", isv.isv_shap_values.morbid_genes, isv.isv_features.morbid_genes),
+                pseudogenes=ShapDatum("Pseudogenes", isv.isv_shap_values.pseudogenes, isv.isv_features.pseudogenes),
+                regions_HI=ShapDatum(
+                    "Haploinsufficient Regions", isv.isv_shap_values.regions_HI, isv.isv_features.regions_HI
+                ),
+                regions_TS=ShapDatum(
+                    "Triplosensitive Regions", isv.isv_shap_values.regions_TS, isv.isv_features.regions_TS
+                ),
+                regulatory=ShapDatum(
+                    "Regulatory Elements", isv.isv_shap_values.regulatory, isv.isv_features.regulatory
+                ),
+                regulatory_enhancer=ShapDatum(
+                    "Enhancers", isv.isv_shap_values.regulatory_enhancer, isv.isv_features.regulatory_enhancer
+                ),
+                snrna=ShapDatum("Small nuclear RNA", isv.isv_shap_values.snrna, isv.isv_features.snrna),
+            )
+        else:
+            return cls(
+                gencode_genes=ShapDatum(
+                    "Overlapped Gencode Elements", isv.isv_shap_values.gencode_genes, isv.isv_features.gencode_genes
+                ),
+                disease_associated=ShapDatum(
+                    "Disease associated Genes",
+                    isv.isv_shap_values.disease_associated_genes,
+                    isv.isv_features.disease_associated_genes,
+                ),
+                hi_genes=ShapDatum("Haploinsufficient Genes", isv.isv_shap_values.hi_genes, isv.isv_features.hi_genes),
+                lncrna=ShapDatum("Long non-coding RNA", isv.isv_shap_values.lncrna, isv.isv_features.lncrna),
+                mirna=ShapDatum("Micro RNA", isv.isv_shap_values.mirna, isv.isv_features.mirna),
+                morbid=ShapDatum("Morbid Genes", isv.isv_shap_values.morbid_genes, isv.isv_features.morbid_genes),
+                protein_coding=ShapDatum(
+                    "Protein Coding Genes", isv.isv_shap_values.protein_coding, isv.isv_features.protein_coding
+                ),
+                pseudogenes=ShapDatum("Pseudogenes", isv.isv_shap_values.pseudogenes, isv.isv_features.pseudogenes),
+                regions_HI=ShapDatum(
+                    "Haploinsufficient Regions", isv.isv_shap_values.regions_HI, isv.isv_features.regions_HI
+                ),
+                regions_TS=ShapDatum(
+                    "Triplosensitive Regions", isv.isv_shap_values.regions_TS, isv.isv_features.regions_TS
+                ),
+                regulatory=ShapDatum(
+                    "Regulatory Elements", isv.isv_shap_values.regulatory, isv.isv_features.regulatory
+                ),
+                regulatory_enhancer=ShapDatum(
+                    "Enhancers", isv.isv_shap_values.regulatory_enhancer, isv.isv_features.regulatory_enhancer
+                ),
+                regulatory_promoter=ShapDatum(
+                    "Promoters", isv.isv_shap_values.regulatory_promoter, isv.isv_features.regulatory_promoter
+                ),
+            )
 
     def generate_plot_as_json(self) -> str:
-        data = self.as_list
+        data = self.as_list_without_nulls
         # Extract the data into separate lists
         labels = [dp.label for dp in data]
         colors = [dp.color for dp in data]

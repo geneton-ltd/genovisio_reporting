@@ -30,14 +30,26 @@ jobs:
         run: |
           poetry install --no-root
 
-      - name: Run tests
+      - name: Run tests for isv loss
         run: |
-          poetry run genovisio-report --annot tests/annotation_test.json.gz --isv tests/isv.json --marcnv tests/marcnv.json --hybrid tests/hybrid.json --out_html tests/test_output.html --out_csv tests/test_output.csv --workflow_version 0.1.2
+          poetry run genovisio-report --annot tests/annotation_test_loss.json.gz --isv tests/isv_loss.json --marcnv tests/marcnv.json --hybrid tests/hybrid.json --out_html tests/test_output_loss.html --out_csv tests/test_output_loss.csv --workflow_version 0.1.2
 
       - name: Compare outputs html
         run: |
-          diff tests/test_output.html tests/expected.html
+          diff tests/test_output_loss.html tests/expected_loss.html
 
       - name: Compare outputs csv
         run: |
-          diff tests/test_output.csv tests/expected.csv
+          diff tests/test_output_loss.csv tests/expected_loss.csv
+
+      - name: Run tests for isv gain
+        run: |
+          poetry run genovisio-report --annot tests/annotation_test_gain.json.gz --isv tests/isv_gain.json --marcnv tests/marcnv.json --hybrid tests/hybrid.json --out_html tests/test_output_gain.html --out_csv tests/test_output_gain.csv --workflow_version 0.1.2
+
+      - name: Compare outputs html
+        run: |
+          diff tests/test_output_gain.html tests/expected_gain.html
+
+      - name: Compare outputs csv
+        run: |
+          diff tests/test_output_gain.csv tests/expected_gain.csv
