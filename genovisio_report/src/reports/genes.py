@@ -29,6 +29,10 @@ class GenesReport:
     disease: GeneReport
     hi: GeneReport
     ts: GeneReport
+    omim_URL_morbid_genes: list[str]
+    omim_URL_disease_asscoiated_genes: list[str]
+    omim_URL_hi_genes: list[str]
+    omim_URL_ts_genes: list[str]
 
     @classmethod
     def build(cls, annot: annotation.Annotation) -> "GenesReport":
@@ -37,6 +41,13 @@ class GenesReport:
             protein_coding=annot.count_gene_types()["protein_coding"],
             morbid=GeneReport(sv_counts["morbid_genes"]),
             disease=GeneReport(sv_counts["associated_with_disease"]),
+
             hi=GeneReport(annot.get_haploinsufficient_gene_names(annotation.enums.Overlap.ANY, [3])),
             ts=GeneReport(annot.get_triplosensitivity_gene_names(annotation.enums.Overlap.ANY, [3])),
+
+            omim_URL_morbid_genes=sv_counts["morbid_genes_urls"],
+            omim_URL_disease_asscoiated_genes=sv_counts["associated_with_disease_urls"],
+
+            omim_URL_hi_genes=annot.get_hi_or_ts_genes_url(annot.get_haploinsufficient_gene_names(annotation.enums.Overlap.ANY, [3])),
+            omim_URL_ts_genes=annot.get_hi_or_ts_genes_url(annot.get_triplosensitivity_gene_names(annotation.enums.Overlap.ANY, [3])),
         )

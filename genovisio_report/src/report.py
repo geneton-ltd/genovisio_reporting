@@ -48,6 +48,10 @@ class FlatReportData:
     genes_disease_associated_list: list[str]
     genes_hi_list: list[str]
     genes_ts_list: list[str]
+    genes_morbid_url: list[str]
+    genes_disease_associated_url: list[str]
+    genes_hi_url: list[str]
+    genes_ts_url: list[str]
     isv_gencode_genes: int | None
     isv_protein_coding: int | None
     isv_pseudogenes: int | None
@@ -142,6 +146,10 @@ class FlatReportData:
             genes_disease_associated_list=ast.literal_eval(row["genes_disease_associated_list"]),
             genes_hi_list=ast.literal_eval(row["genes_hi_list"]),
             genes_ts_list=ast.literal_eval(row["genes_ts_list"]),
+            genes_morbid_url=ast.literal_eval(row['genes_morbid_url']),
+            genes_disease_associated_url=ast.literal_eval(row['genes_disease_associated_url']),
+            genes_hi_url=ast.literal_eval(row['genes_hi_url']),
+            genes_ts_url=ast.literal_eval(row['genes_ts_url']),
             isv_gencode_genes=int(row["isv_gencode_genes"]) if row["isv_gencode_genes"] else None,
             isv_protein_coding=int(row["isv_protein_coding"]) if row["isv_protein_coding"] else None,
             isv_pseudogenes=int(row["isv_pseudogenes"]) if row["isv_pseudogenes"] else None,
@@ -277,6 +285,10 @@ class ReportData:
             genes_disease_associated_list=self.genes.disease.genes,
             genes_hi_list=self.genes.hi.genes,
             genes_ts_list=self.genes.ts.genes,
+            genes_morbid_url=self.genes.omim_URL_morbid_genes,
+            genes_disease_associated_url=self.genes.omim_URL_disease_asscoiated_genes,
+            genes_hi_url=self.genes.omim_URL_hi_genes,
+            genes_ts_url=self.genes.omim_URL_ts_genes,
             isv_gencode_genes=self.isv_shaps.gencode_genes.value if self.isv_shaps.gencode_genes else None,
             isv_protein_coding=self.isv_shaps.protein_coding.value if self.isv_shaps.protein_coding else None,
             isv_pseudogenes=self.isv_shaps.pseudogenes.value if self.isv_shaps.pseudogenes else None,
