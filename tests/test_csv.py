@@ -29,7 +29,7 @@ def test_genovisio_report():
                      output_html='tests/test_output_gain.html',
                      output_csv='tests/test_output_gain.csv',
                      report_id='REPORT_ID_gain_test', version='0.3.0',
-                     workflow_version='2.1.0')
+                     workflow_version='0.1.2')
     
     genovisio_report(annotation_input='tests/annotation_test_loss.json.gz',
                      isv_input='tests/isv_loss.json',
@@ -38,4 +38,4 @@ def test_genovisio_report():
                      output_html='tests/test_output_loss.html',
                      output_csv='tests/test_output_loss.csv',
                      report_id='REPORT_ID_loss_test', version='0.3.0',
-                     workflow_version='2.1.0')
+                     workflow_version='0.1.2')
