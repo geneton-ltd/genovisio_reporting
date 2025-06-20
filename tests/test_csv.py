@@ -7,7 +7,7 @@ from genovisio_report.main import genovisio_report
 def test_expected_csv():
     flat = report.FlatReportData.load_from_csv("tests/expected_output_loss.csv")
 
-    assert flat.report_id == "REPORT_ID_loss_test"
+    assert flat.report_id == ""
     assert flat.genes_morbid_list == ["TDRD7"]
 
 def test_get_annotations():
@@ -28,7 +28,7 @@ def test_genovisio_report():
                      hybrid_input='tests/hybrid.json',
                      output_html='tests/test_output_gain.html',
                      output_csv='tests/test_output_gain.csv',
-                     report_id='REPORT_ID_gain_test', version='0.3.0',
+                     report_id=None, version='0.3.0',
                      workflow_version='0.1.2')
     
     genovisio_report(annotation_input='tests/annotation_test_loss.json.gz',
@@ -37,5 +37,5 @@ def test_genovisio_report():
                      hybrid_input='tests/hybrid.json',
                      output_html='tests/test_output_loss.html',
                      output_csv='tests/test_output_loss.csv',
-                     report_id='REPORT_ID_loss_test', version='0.3.0',
+                     report_id=None, version='0.3.0',
                      workflow_version='0.1.2')
