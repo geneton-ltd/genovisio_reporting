@@ -5,9 +5,9 @@ from genovisio_report.main import genovisio_report
 
 
 def test_expected_csv():
-    flat = report.FlatReportData.load_from_csv("tests/expected_output_loss_csv.csv")
+    flat = report.FlatReportData.load_from_csv("tests/expected_output_loss.csv")
 
-    assert flat.report_id == "REPORT_ID_test"
+    assert flat.report_id == "REPORT_ID_loss_test"
     assert flat.genes_morbid_list == ["TDRD7"]
 
 def test_get_annotations():
@@ -22,11 +22,20 @@ def test_get_annotations():
 
 
 def test_genovisio_report():
-    genovisio_report(annotation_input='tests/annotation_test_loss.json.gz',
+    genovisio_report(annotation_input='tests/annotation_test_gain.json.gz',
                      isv_input='tests/isv_gain.json',
                      marcnv_input='tests/marcnv.json',
                      hybrid_input='tests/hybrid.json',
-                     output_html='report_html.html',
-                     output_csv='report_csv.csv',
-                     report_id='REPORT_ID_test', version='0.3.0',
-                     workflow_version='')
+                     output_html='tests/test_output_gain.html',
+                     output_csv='tests/test_output_gain.csv',
+                     report_id='REPORT_ID_gain_test', version='0.3.0',
+                     workflow_version='2.1.0')
+    
+    genovisio_report(annotation_input='tests/annotation_test_loss.json.gz',
+                     isv_input='tests/isv_loss.json',
+                     marcnv_input='tests/marcnv.json',
+                     hybrid_input='tests/hybrid.json',
+                     output_html='tests/test_output_loss.html',
+                     output_csv='tests/test_output_loss.csv',
+                     report_id='REPORT_ID_loss_test', version='0.3.0',
+                     workflow_version='2.1.0')
