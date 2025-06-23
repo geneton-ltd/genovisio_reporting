@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.5.0](https://github.com/geneton-ltd/genovisio_reporting/compare/v0.4.0...v0.5.0) (2025-06-23)
+
+
+### Features
+
+* poetry lock update ([7f60ab0](https://github.com/geneton-ltd/genovisio_reporting/commit/7f60ab0f275f39666423bae624490f4d608f394b))
+
+
+### Bug Fixes
+
+* changed release version of annotation ([a6ce723](https://github.com/geneton-ltd/genovisio_reporting/commit/a6ce723a57b7947d8ea3f08903f9580d0dee1312))
+* changed version ([8a0661b](https://github.com/geneton-ltd/genovisio_reporting/commit/8a0661bdd0ff2227b5fa56a79557635504ea7d28))
+* omim url ([7837c6b](https://github.com/geneton-ltd/genovisio_reporting/commit/7837c6b5e6819ca98a1f6404ee06eb2e8d00e5ef))
+
 ## [0.4.0](https://github.com/geneton-ltd/genovisio_reporting/compare/v0.3.0...v0.4.0) (2025-06-20)
 
 
