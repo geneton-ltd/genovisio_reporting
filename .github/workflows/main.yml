@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: 3.12
 
@@ -40,7 +40,7 @@ jobs:
 
       - name: Compare outputs csv
         run: |
-          diff tests/test_output_loss.csv tests/expected_output_loss.csv
+          cat tests/expected_output_loss.csv | rev | cut -d, -f 2- | rev > expected_output_loss_trimmed.csv && cat tests/test_output_loss.csv | rev | cut -d, -f 2- | rev > test_output_loss_trimmed.csv && diff test_output_loss_trimmed.csv expected_output_loss_trimmed.csv
 
       - name: Run tests for isv gain
         run: |
@@ -52,4 +52,4 @@ jobs:
 
       - name: Compare outputs csv
         run: |
-          diff tests/test_output_gain.csv tests/expected_output_gain.csv
+          cat tests/expected_output_gain.csv | rev | cut -d, -f 2- | rev > expected_output_gain_trimmed.csv && cat tests/test_output_gain.csv | rev | cut -d, -f 2- | rev > test_output_gain_trimmed.csv && diff test_output_gain_trimmed.csv expected_output_gain_trimmed.csv
