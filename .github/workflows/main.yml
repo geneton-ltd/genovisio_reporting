@@ -40,7 +40,7 @@ jobs:
 
       - name: Compare outputs csv
         run: |
-          cat tests/expected_output_loss.csv | rev | cut -d, -f 2- | rev > expected_output_loss_trimmed.csv && diff tests/test_output_loss.csv expected_output_loss_trimmed.csv
+          cat tests/expected_output_loss.csv | rev | cut -d, -f 2- | rev > expected_output_loss_trimmed.csv && cat tests/test_output_loss.csv | rev | cut -d, -f 2- | rev > test_output_loss_trimmed.csv && diff test_output_loss_trimmed.csv expected_output_loss_trimmed.csv
 
       - name: Run tests for isv gain
         run: |
@@ -52,4 +52,4 @@ jobs:
 
       - name: Compare outputs csv
         run: |
-          cat tests/expected_output_gain.csv | rev | cut -d, -f 2- | rev > expected_output_gain_trimmed.csv && diff tests/test_output_gain.csv expected_output_gain_trimmed.csv
+          cat tests/expected_output_gain.csv | rev | cut -d, -f 2- | rev > expected_output_gain_trimmed.csv && cat tests/test_output_gain.csv | rev | cut -d, -f 2- | rev > test_output_gain_trimmed.csv && diff test_output_gain_trimmed.csv expected_output_gain_trimmed.csv
