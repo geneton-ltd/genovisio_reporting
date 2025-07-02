@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.1](https://github.com/geneton-ltd/genovisio_reporting/compare/v0.5.0...v0.5.1) (2025-07-02)
+
+
+### Bug Fixes
+
+* deployment fixed to use release version ([ac314a5](https://github.com/geneton-ltd/genovisio_reporting/commit/ac314a51d64ff8129500e0efa699aca9358b2ed4))
+* specify pyproject tag to prevent incorrect parsing ([59f122a](https://github.com/geneton-ltd/genovisio_reporting/commit/59f122aeff5a6b0761d74abe3a82891766922cee))
+
 ## [0.5.0](https://github.com/geneton-ltd/genovisio_reporting/compare/v0.4.0...v0.5.0) (2025-06-23)
 
 
