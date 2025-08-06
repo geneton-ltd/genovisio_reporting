@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.5.2](https://github.com/geneton-ltd/genovisio_reporting/compare/v0.5.1...v0.5.2) (2025-08-06)
+
+
+### Bug Fixes
+
+* fixed hybrid caller graph ([d7e1dc4](https://github.com/geneton-ltd/genovisio_reporting/commit/d7e1dc4e3177db9e3952d299c26bc5297dcf690a))
+* fixed hybrid caller graph ([c3f899a](https://github.com/geneton-ltd/genovisio_reporting/commit/c3f899ae1e221c71f982a32c7b017db14221ac6a))
+* hybrid caller graph ([cd288d0](https://github.com/geneton-ltd/genovisio_reporting/commit/cd288d09fb85ab844b0f844231116abff1a77073))
+
+
+### Reverts
+
+* 45ee6a55275997672777ce0f6cf5702ee9c38db2 ([819576b](https://github.com/geneton-ltd/genovisio_reporting/commit/819576bc1ca243f908c34addad7ab004528c92a5))
+
 ## [0.5.1](https://github.com/geneton-ltd/genovisio_reporting/compare/v0.5.0...v0.5.1) (2025-07-02)
 
 
