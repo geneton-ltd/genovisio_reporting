@@ -61,7 +61,7 @@ def render_template_html(data: report.ReportData) -> str:
         genes=data.genes,
         marcnv_plot=reports.create_prediction_plot(data.classification_marcnv),
         isv_plot=reports.create_prediction_plot(data.classification_isv),
-        hybrid_plot=reports.create_prediction_plot(data.classification_hybrid),
+        hybrid_plot=reports.create_prediction_plot(data.classification_isv),
         float_format_string=core.FLOAT_FORMAT_STRING,
         version_string=data.version_string,
     )
