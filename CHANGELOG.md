@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.3](https://github.com/geneton-ltd/genovisio_reporting/compare/v0.5.2...v0.5.3) (2025-09-03)
+
+
+### Bug Fixes
+
+* refactored getting urls for hi/ts genes ([2fb83b9](https://github.com/geneton-ltd/genovisio_reporting/commit/2fb83b9f53a94a6f05dfb29b519a30373f19d528))
+* refactored getting urls for hi/ts genes ([095ffde](https://github.com/geneton-ltd/genovisio_reporting/commit/095ffde82763fa314f5c0b584c0aa449072da14d))
+
 ## [0.5.2](https://github.com/geneton-ltd/genovisio_reporting/compare/v0.5.1...v0.5.2) (2025-08-06)
 
 
