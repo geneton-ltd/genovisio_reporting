@@ -72,6 +72,11 @@ class FlatReportData:
     isv_regulatory_DNase_I_hypersensitive_site: int | None
     isv_regulatory_enhancer_blocking_element: int | None
     isv_regulatory_TATA_box: int | None
+    isv_regulatory_open_chromatin_region: int | None
+    isv_regulatory_flanking_region: int | None
+    isv_regulatory_CTCF_binding_site: int | None
+    isv_regulatory_TF_binding_site: int | None
+    isv_regulatory_curated: int | None
     isv_shap_gencode_genes: float | None
     isv_shap_protein_coding: float | None
     isv_shap_pseudogenes: float | None
@@ -92,6 +97,11 @@ class FlatReportData:
     isv_shap_regulatory_DNase_I_hypersensitive_site: float | None
     isv_shap_regulatory_enhancer_blocking_element: float | None
     isv_shap_regulatory_TATA_box: float | None
+    isv_shap_regulatory_open_chromatin_region: float | None
+    isv_shap_regulatory_flanking_region: float | None
+    isv_shap_regulatory_CTCF_binding_site: float | None
+    isv_shap_regulatory_TF_binding_site: float | None
+    isv_shap_regulatory_curated: float | None
     workflow_version: str | None
     report_version: str
 
@@ -146,10 +156,10 @@ class FlatReportData:
             genes_disease_associated_list=ast.literal_eval(row["genes_disease_associated_list"]),
             genes_hi_list=ast.literal_eval(row["genes_hi_list"]),
             genes_ts_list=ast.literal_eval(row["genes_ts_list"]),
-            genes_morbid_url=ast.literal_eval(row['genes_morbid_url']),
-            genes_disease_associated_url=ast.literal_eval(row['genes_disease_associated_url']),
-            genes_hi_url=ast.literal_eval(row['genes_hi_url']),
-            genes_ts_url=ast.literal_eval(row['genes_ts_url']),
+            genes_morbid_url=ast.literal_eval(row["genes_morbid_url"]),
+            genes_disease_associated_url=ast.literal_eval(row["genes_disease_associated_url"]),
+            genes_hi_url=ast.literal_eval(row["genes_hi_url"]),
+            genes_ts_url=ast.literal_eval(row["genes_ts_url"]),
             isv_gencode_genes=int(row["isv_gencode_genes"]) if row["isv_gencode_genes"] else None,
             isv_protein_coding=int(row["isv_protein_coding"]) if row["isv_protein_coding"] else None,
             isv_pseudogenes=int(row["isv_pseudogenes"]) if row["isv_pseudogenes"] else None,
@@ -180,6 +190,19 @@ class FlatReportData:
             if row["isv_regulatory_enhancer_blocking_element"]
             else None,
             isv_regulatory_TATA_box=int(row["isv_regulatory_TATA_box"]) if row["isv_regulatory_TATA_box"] else None,
+            isv_regulatory_open_chromatin_region=int(row["isv_regulatory_open_chromatin_region"])
+            if row["isv_regulatory_open_chromatin_region"]
+            else None,
+            isv_regulatory_flanking_region=int(row["isv_regulatory_flanking_region"])
+            if row["isv_regulatory_flanking_region"]
+            else None,
+            isv_regulatory_CTCF_binding_site=int(row["isv_regulatory_CTCF_binding_site"])
+            if row["isv_regulatory_CTCF_binding_site"]
+            else None,
+            isv_regulatory_TF_binding_site=int(row["isv_regulatory_TF_binding_site"])
+            if row["isv_regulatory_TF_binding_site"]
+            else None,
+            isv_regulatory_curated=int(row["isv_regulatory_curated"]) if row["isv_regulatory_curated"] else None,
             isv_shap_gencode_genes=float(row["isv_shap_gencode_genes"]) if row["isv_shap_gencode_genes"] else None,
             isv_shap_protein_coding=float(row["isv_shap_protein_coding"]) if row["isv_shap_protein_coding"] else None,
             isv_shap_pseudogenes=float(row["isv_shap_pseudogenes"]) if row["isv_shap_pseudogenes"] else None,
@@ -220,6 +243,21 @@ class FlatReportData:
             isv_shap_regulatory_TATA_box=float(row["isv_shap_regulatory_TATA_box"])
             if row["isv_shap_regulatory_TATA_box"]
             else None,
+            isv_shap_regulatory_open_chromatin_region=float(row["isv_shap_regulatory_open_chromatin_region"])
+            if row["isv_shap_regulatory_open_chromatin_region"]
+            else None,
+            isv_shap_regulatory_flanking_region=float(row["isv_shap_regulatory_flanking_region"])
+            if row["isv_shap_regulatory_flanking_region"]
+            else None,
+            isv_shap_regulatory_CTCF_binding_site=float(row["isv_shap_regulatory_CTCF_binding_site"])
+            if row["isv_shap_regulatory_CTCF_binding_site"]
+            else None,
+            isv_shap_regulatory_TF_binding_site=float(row["isv_shap_regulatory_TF_binding_site"])
+            if row["isv_shap_regulatory_TF_binding_site"]
+            else None,
+            isv_shap_regulatory_curated=float(row["isv_shap_regulatory_curated"])
+            if row["isv_shap_regulatory_curated"]
+            else None,
             workflow_version=row["workflow_version"],
             report_version=row["report_version"],
         )
@@ -242,7 +280,7 @@ class ReportData:
     @property
     def version_string(self) -> str:
         if self.workflow_version:
-            return f"Generated from workflow v{self.workflow_version}"
+            return f"Generated from Genovisio workflow v{self.workflow_version}"
         return f"Generated by reporting v{self.report_version}"
 
     @property
@@ -325,6 +363,21 @@ class ReportData:
             isv_regulatory_TATA_box=self.isv_shaps.regulatory_TATA_box.value
             if self.isv_shaps.regulatory_TATA_box
             else None,
+            isv_regulatory_CTCF_binding_site=self.isv_shaps.regulatory_CTCF_binding_site.value
+            if self.isv_shaps.regulatory_CTCF_binding_site
+            else None,
+            isv_regulatory_TF_binding_site=self.isv_shaps.regulatory_TF_binding_site.value
+            if self.isv_shaps.regulatory_TF_binding_site
+            else None,
+            isv_regulatory_open_chromatin_region=self.isv_shaps.regulatory_open_chromatin_region.value
+            if self.isv_shaps.regulatory_open_chromatin_region
+            else None,
+            isv_regulatory_flanking_region=self.isv_shaps.regulatory_flanking_region.value
+            if self.isv_shaps.regulatory_flanking_region
+            else None,
+            isv_regulatory_curated=self.isv_shaps.regulatory_curated.value
+            if self.isv_shaps.regulatory_curated
+            else None,
             isv_shap_gencode_genes=self.isv_shaps.gencode_genes.shap if self.isv_shaps.gencode_genes else None,
             isv_shap_protein_coding=self.isv_shaps.protein_coding.shap if self.isv_shaps.protein_coding else None,
             isv_shap_pseudogenes=self.isv_shaps.pseudogenes.shap if self.isv_shaps.pseudogenes else None,
@@ -360,6 +413,21 @@ class ReportData:
             else None,
             isv_shap_regulatory_TATA_box=self.isv_shaps.regulatory_TATA_box.shap
             if self.isv_shaps.regulatory_TATA_box
+            else None,
+            isv_shap_regulatory_CTCF_binding_site=self.isv_shaps.regulatory_CTCF_binding_site.shap
+            if self.isv_shaps.regulatory_CTCF_binding_site
+            else None,
+            isv_shap_regulatory_TF_binding_site=self.isv_shaps.regulatory_TF_binding_site.shap
+            if self.isv_shaps.regulatory_TF_binding_site
+            else None,
+            isv_shap_regulatory_open_chromatin_region=self.isv_shaps.regulatory_open_chromatin_region.shap
+            if self.isv_shaps.regulatory_open_chromatin_region
+            else None,
+            isv_shap_regulatory_flanking_region=self.isv_shaps.regulatory_flanking_region.shap
+            if self.isv_shaps.regulatory_flanking_region
+            else None,
+            isv_shap_regulatory_curated=self.isv_shaps.regulatory_curated.shap
+            if self.isv_shaps.regulatory_curated
             else None,
             workflow_version=self.workflow_version,
             report_version=self.report_version,

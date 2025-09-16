@@ -75,6 +75,11 @@ class ShapData:
     regulatory_transcriptional_cis_regulatory_region: ShapDatum | None = None
     rrna: ShapDatum | None = None
     snrna: ShapDatum | None = None
+    regulatory_open_chromatin_region: ShapDatum | None = None
+    regulatory_flanking_region: ShapDatum | None = None
+    regulatory_CTCF_binding_site: ShapDatum | None = None
+    regulatory_TF_binding_site: ShapDatum | None = None
+    regulatory_curated: ShapDatum | None = None
 
     @property
     def as_list_without_nulls(self) -> list[ShapDatum]:
@@ -89,18 +94,17 @@ class ShapData:
                 gencode_genes=ShapDatum(
                     "Overlapped Gencode Elements", isv.isv_shap_values.gencode_genes, isv.isv_features.gencode_genes
                 ),
+                protein_coding=ShapDatum(
+                    "Protein Coding Genes", isv.isv_shap_values.protein_coding, isv.isv_features.protein_coding
+                ),
                 disease_associated=ShapDatum(
                     "Disease associated Genes",
                     isv.isv_shap_values.disease_associated_genes,
                     isv.isv_features.disease_associated_genes,
                 ),
-                hi_genes=ShapDatum("Haploinsufficient Genes", isv.isv_shap_values.hi_genes, isv.isv_features.hi_genes),
                 mirna=ShapDatum("Micro RNA", isv.isv_shap_values.mirna, isv.isv_features.mirna),
                 morbid=ShapDatum("Morbid Genes", isv.isv_shap_values.morbid_genes, isv.isv_features.morbid_genes),
                 pseudogenes=ShapDatum("Pseudogenes", isv.isv_shap_values.pseudogenes, isv.isv_features.pseudogenes),
-                regions_HI=ShapDatum(
-                    "Haploinsufficient Regions", isv.isv_shap_values.regions_HI, isv.isv_features.regions_HI
-                ),
                 regions_TS=ShapDatum(
                     "Triplosensitive Regions", isv.isv_shap_values.regions_TS, isv.isv_features.regions_TS
                 ),
@@ -111,6 +115,36 @@ class ShapData:
                     "Enhancers", isv.isv_shap_values.regulatory_enhancer, isv.isv_features.regulatory_enhancer
                 ),
                 snrna=ShapDatum("Small nuclear RNA", isv.isv_shap_values.snrna, isv.isv_features.snrna),
+                lncrna=ShapDatum("Long non-coding RNA", isv.isv_shap_values.lncrna, isv.isv_features.lncrna),
+                rrna=ShapDatum("Ribosomal RNA", isv.isv_shap_values.rrna, isv.isv_features.rrna),
+                regulatory_promoter=ShapDatum(
+                    "Promoters", isv.isv_shap_values.regulatory_promoter, isv.isv_features.regulatory_promoter
+                ),
+                regulatory_open_chromatin_region=ShapDatum(
+                    "Open Chromatin Regions",
+                    isv.isv_shap_values.regulatory_open_chromatin_region,
+                    isv.isv_features.regulatory_open_chromatin_region,
+                ),
+                regulatory_flanking_region=ShapDatum(
+                    "Flanking Regions",
+                    isv.isv_shap_values.regulatory_flanking_region,
+                    isv.isv_features.regulatory_flanking_region,
+                ),
+                regulatory_CTCF_binding_site=ShapDatum(
+                    "CTCF Binding Sites",
+                    isv.isv_shap_values.regulatory_CTCF_binding_site,
+                    isv.isv_features.regulatory_CTCF_binding_site,
+                ),
+                regulatory_TF_binding_site=ShapDatum(
+                    "Transcription Factor Binding Sites",
+                    isv.isv_shap_values.regulatory_TF_binding_site,
+                    isv.isv_features.regulatory_TF_binding_site,
+                ),
+                regulatory_curated=ShapDatum(
+                    "Curated Regulatory Elements",
+                    isv.isv_shap_values.regulatory_curated,
+                    isv.isv_features.regulatory_curated,
+                ),
             )
         else:
             return cls(
@@ -125,6 +159,8 @@ class ShapData:
                 hi_genes=ShapDatum("Haploinsufficient Genes", isv.isv_shap_values.hi_genes, isv.isv_features.hi_genes),
                 lncrna=ShapDatum("Long non-coding RNA", isv.isv_shap_values.lncrna, isv.isv_features.lncrna),
                 mirna=ShapDatum("Micro RNA", isv.isv_shap_values.mirna, isv.isv_features.mirna),
+                rrna=ShapDatum("Ribosomal RNA", isv.isv_shap_values.rrna, isv.isv_features.rrna),
+                snrna=ShapDatum("Small nuclear RNA", isv.isv_shap_values.snrna, isv.isv_features.snrna),
                 morbid=ShapDatum("Morbid Genes", isv.isv_shap_values.morbid_genes, isv.isv_features.morbid_genes),
                 protein_coding=ShapDatum(
                     "Protein Coding Genes", isv.isv_shap_values.protein_coding, isv.isv_features.protein_coding
@@ -133,17 +169,39 @@ class ShapData:
                 regions_HI=ShapDatum(
                     "Haploinsufficient Regions", isv.isv_shap_values.regions_HI, isv.isv_features.regions_HI
                 ),
-                regions_TS=ShapDatum(
-                    "Triplosensitive Regions", isv.isv_shap_values.regions_TS, isv.isv_features.regions_TS
-                ),
                 regulatory=ShapDatum(
                     "Regulatory Elements", isv.isv_shap_values.regulatory, isv.isv_features.regulatory
+                ),
+                regulatory_open_chromatin_region=ShapDatum(
+                    "Open Chromatin Regions",
+                    isv.isv_shap_values.regulatory_open_chromatin_region,
+                    isv.isv_features.regulatory_open_chromatin_region,
                 ),
                 regulatory_enhancer=ShapDatum(
                     "Enhancers", isv.isv_shap_values.regulatory_enhancer, isv.isv_features.regulatory_enhancer
                 ),
                 regulatory_promoter=ShapDatum(
                     "Promoters", isv.isv_shap_values.regulatory_promoter, isv.isv_features.regulatory_promoter
+                ),
+                regulatory_flanking_region=ShapDatum(
+                    "Flanking Regions",
+                    isv.isv_shap_values.regulatory_flanking_region,
+                    isv.isv_features.regulatory_flanking_region,
+                ),
+                regulatory_CTCF_binding_site=ShapDatum(
+                    "CTCF Binding Sites",
+                    isv.isv_shap_values.regulatory_CTCF_binding_site,
+                    isv.isv_features.regulatory_CTCF_binding_site,
+                ),
+                regulatory_TF_binding_site=ShapDatum(
+                    "Transcription Factor Binding Sites",
+                    isv.isv_shap_values.regulatory_TF_binding_site,
+                    isv.isv_features.regulatory_TF_binding_site,
+                ),
+                regulatory_curated=ShapDatum(
+                    "Curated Regulatory Elements",
+                    isv.isv_shap_values.regulatory_curated,
+                    isv.isv_features.regulatory_curated,
                 ),
             )
 
