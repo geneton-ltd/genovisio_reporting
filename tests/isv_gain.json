@@ -4,16 +4,23 @@
   "isv_classification": "Likely Benign",
   "isv_shap_values": {
     "gencode_genes": -0.017186203593183673,
+    "protein_coding": 0.02184197867864168,
     "pseudogenes": -0.007123684375570069,
     "mirna": -1.036799111268085e-06,
+    "lncrna": -0.004353678792829079,
+    "rrna": 0.0,
     "snrna": 0.008558311941202901,
     "morbid_genes": 0.0035552671220837506,
     "disease_associated_genes": 0.01903788500422919,
-    "hi_genes": -0.006212273341317654,
-    "regions_HI": 0.002722864239490889,
     "regions_TS": -0.010199338549626473,
     "regulatory": 0.017366536040680506,
-    "regulatory_enhancer": -0.02190167287641485
+    "regulatory_enhancer": -0.02190167287641485,
+    "regulatory_open_chromatin_region": 0.0,
+    "regulatory_promoter": 0.0,
+    "regulatory_flanking_region": 0.0,
+    "regulatory_CTCF_binding_site": 0.0,
+    "regulatory_TF_binding_site": 0.0,
+    "regulatory_curated": 0.0
   },
   "isv_features": {
     "gencode_genes": 35,
@@ -35,6 +42,12 @@
     "regulatory_promoter": 24,
     "regulatory_DNase_I_hypersensitive_site": 0,
     "regulatory_enhancer_blocking_element": 0,
-    "regulatory_TATA_box": 0
-  }
+    "regulatory_TATA_box": 0,
+    "regulatory_open_chromatin_region": 0,
+    "regulatory_flanking_region": 0,
+    "regulatory_CTCF_binding_site": 0,
+    "regulatory_TF_binding_site": 0,
+    "regulatory_curated": 0
+  },
+  "explainer_base_value": -1.0023186206817627
 }

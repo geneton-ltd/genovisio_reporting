@@ -24,6 +24,11 @@ class ISVFeatures(pydantic.BaseModel):
     regulatory_DNase_I_hypersensitive_site: int
     regulatory_enhancer_blocking_element: int
     regulatory_TATA_box: int
+    regulatory_open_chromatin_region: int
+    regulatory_flanking_region: int
+    regulatory_CTCF_binding_site: int
+    regulatory_TF_binding_site: int
+    regulatory_curated: int
 
     def as_dict(self) -> dict[str, int]:
         return self.model_dump()
@@ -36,11 +41,18 @@ class SHAPsGain(pydantic.BaseModel):
     snrna: float
     morbid_genes: float
     disease_associated_genes: float
-    hi_genes: float
-    regions_HI: float
     regions_TS: float
     regulatory: float
     regulatory_enhancer: float
+    protein_coding: float
+    lncrna: float
+    rrna: float
+    regulatory_open_chromatin_region: float
+    regulatory_promoter: float
+    regulatory_flanking_region: float
+    regulatory_CTCF_binding_site: float
+    regulatory_TF_binding_site: float
+    regulatory_curated: float
 
     def as_dict(self) -> dict[str, float]:
         return self.model_dump()
@@ -52,14 +64,20 @@ class SHAPsLoss(pydantic.BaseModel):
     pseudogenes: float
     mirna: float
     lncrna: float
+    rrna: float
+    snrna: float
     morbid_genes: float
     disease_associated_genes: float
     hi_genes: float
     regions_HI: float
-    regions_TS: float
     regulatory: float
     regulatory_enhancer: float
+    regulatory_open_chromatin_region: float
     regulatory_promoter: float
+    regulatory_flanking_region: float
+    regulatory_CTCF_binding_site: float
+    regulatory_TF_binding_site: float
+    regulatory_curated: float
 
     def as_dict(self) -> dict[str, float]:
         return self.model_dump()
@@ -71,6 +89,7 @@ class ISVResult(pydantic.BaseModel):
     classification: enums.Severity = pydantic.Field(alias="isv_classification")
     isv_shap_values: SHAPsGain | SHAPsLoss = pydantic.Field(alias="isv_shap_values")
     isv_features: ISVFeatures = pydantic.Field(alias="isv_features")
+    explainer_base_value: float = pydantic.Field(alias="explainer_base_value")
 
     @pydantic.field_validator("classification", mode="before")
     def classification_uppercase(cls, v: str) -> enums.Severity:
