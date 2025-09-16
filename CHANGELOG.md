@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.0](https://github.com/geneton-ltd/genovisio_reporting/compare/v0.5.3...v0.6.0) (2025-09-16)
+
+
+### Features
+
+* bumped isv ([a8642c0](https://github.com/geneton-ltd/genovisio_reporting/commit/a8642c062df0af3d64519f73cb85b5660f905ed3))
+* bumped isv ([e856b83](https://github.com/geneton-ltd/genovisio_reporting/commit/e856b83cbc463923f621c40865e7a9fb1d9ef793))
+
 ## [0.5.3](https://github.com/geneton-ltd/genovisio_reporting/compare/v0.5.2...v0.5.3) (2025-09-03)
 
 
