@@ -1,9 +1,8 @@
-import re
 from dataclasses import dataclass, fields
 
 import plotly.graph_objects as go
 
-from genovisio_report.src import core, input_schemas
+from genovisio_report.src import input_schemas
 
 
 def _split_string(s: str) -> str:
@@ -34,9 +33,9 @@ class ShapDatum:
 
     @property
     def color_label(self) -> str | None:
-        m = re.search(r"(\[.+\] )(.+)", _split_string(self.label))
-        if m:
-            return f'<span style="color: gray"><b>{m.group(1)}</b></span>{m.group(2)}'
+        labels = self.label.split(" ", 1)
+        if len(labels) == 2:
+            return f'<span style="color: black"><b>{labels[0]}</b></span> {labels[1]}'
         return None
 
     @property
@@ -50,7 +49,8 @@ class ShapDatum:
 
     @property
     def hovertext(self) -> str:
-        return f"<b><i>{self.name}</i></b><br><b>value:</b> {self.value}<br><b>SHAP value:</b> {core.float_format(self.shap)}"
+        # return f"<b><i>{self.name}</i></b><br><b>value:</b> {self.value}<br><b>SHAP value:</b> {core.float_format(self.shap)}"
+        return f"<b><i>{self.name}</i></b><br><b>count:</b> {self.value}"
 
 
 @dataclass
@@ -92,7 +92,7 @@ class ShapData:
         if isinstance(isv.isv_shap_values, input_schemas.SHAPsGain):
             return cls(
                 gencode_genes=ShapDatum(
-                    "Overlapped Gencode Elements", isv.isv_shap_values.gencode_genes, isv.isv_features.gencode_genes
+                    "Gencode Elements", isv.isv_shap_values.gencode_genes, isv.isv_features.gencode_genes
                 ),
                 protein_coding=ShapDatum(
                     "Protein Coding Genes", isv.isv_shap_values.protein_coding, isv.isv_features.protein_coding
@@ -149,7 +149,7 @@ class ShapData:
         else:
             return cls(
                 gencode_genes=ShapDatum(
-                    "Overlapped Gencode Elements", isv.isv_shap_values.gencode_genes, isv.isv_features.gencode_genes
+                    "Gencode Elements", isv.isv_shap_values.gencode_genes, isv.isv_features.gencode_genes
                 ),
                 disease_associated=ShapDatum(
                     "Disease associated Genes",
@@ -220,15 +220,21 @@ class ShapData:
             y=labels,
             orientation="h",
             marker=dict(color=colors),
-            text=[core.float_format(shap) for shap in shaps],
+            # text=[core.float_format(shap) for shap in shaps],
             textposition="outside",
             textfont=dict(size=9),
             hovertext=hovertexts,
             hoverinfo="text",
         )
 
+        # dynamic range for x axis
+        shap_min_value = min(min(shaps) - 0.1, -1)
+        shap_max_value = max(max(shaps) + 0.1, 1)
+
         fig.add_vline(x=0, line_color="black", line_width=1)
-        fig.update_xaxes(tickfont=dict(size=9), range=[-1, 1])
+        fig.update_xaxes(
+            range=[shap_min_value, shap_max_value], showline=False, zeroline=True, ticks="", showticklabels=False
+        )
         fig.update_yaxes(tickfont=dict(size=9), tickmode="array", tickvals=labels, ticktext=color_labels)
         fig.update_layout(template="plotly_white", height=450, width=400, margin=dict(l=20, r=20, t=20, b=20))
         return fig.to_json()
