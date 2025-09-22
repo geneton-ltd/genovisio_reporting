@@ -78,7 +78,7 @@ def create_prediction_plot(severity: enums.Severity) -> str:
         textinfo="text",
         textposition="inside",
         hoverinfo="label",
-        labels=["B", "LB", "VUS", "LP", "P", " "],
+        labels=["Benign", "Likely Benign", "Uncertain Significance", "Likely Pathogenic", "Pathogenic", " "],
         showlegend=False,
     )
     fig.update_layout(template="plotly_white", height=150, width=150, margin=dict(l=1, r=1, t=1, b=1))
