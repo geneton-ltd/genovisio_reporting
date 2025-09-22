@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.6.1](https://github.com/geneton-ltd/genovisio_reporting/compare/v0.6.0...v0.6.1) (2025-09-22)
+
+
+### Bug Fixes
+
+* cosmetics ([c96fff6](https://github.com/geneton-ltd/genovisio_reporting/commit/c96fff694ecfc983ac5e17bad4a3043e78746cb3))
+* removed SHAP values, dynamic range, emphasized feature counts ([fb19879](https://github.com/geneton-ltd/genovisio_reporting/commit/fb19879cc663b9b83771ca294e5f57d5d1dfb692))
+* renamed category labels ([0f1b86c](https://github.com/geneton-ltd/genovisio_reporting/commit/0f1b86c867df53eb23b4b878f60e83dc75329b36))
+* renamed tool names ([adf2d33](https://github.com/geneton-ltd/genovisio_reporting/commit/adf2d334abcd97c8c4bbe0b3e870f9ed5917df1b))
+
 ## [0.6.0](https://github.com/geneton-ltd/genovisio_reporting/compare/v0.5.3...v0.6.0) (2025-09-16)
 
 
